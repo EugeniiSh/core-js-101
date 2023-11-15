@@ -494,8 +494,8 @@ function isBracketsBalanced(str) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
@@ -511,8 +511,19 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  const result = pathes.reduce((acc, item) => {
+    let tempAcc = '';
+    for (let i = 0; i < acc.length; i += 1) {
+      if ((acc[i] === item[i]) && (acc[i] === '/')) {
+        tempAcc = acc.substr(0, i + 1);
+      } else if (acc[i] !== item[i]) {
+        return tempAcc;
+      }
+    }
+    return tempAcc;
+  });
+  return result;
 }
 
 
@@ -534,8 +545,21 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  const result = [];
+
+  for (let j = 0; j < m1.length; j += 1) {
+    const tempArr = [];
+    for (let i = 0; i < m2[0].length; i += 1) {
+      const tempSum = m1[j].reduce((acc, item, index) => {
+        const summ = acc + item * m2[index][i];
+        return summ;
+      }, 0);
+      tempArr.push(tempSum);
+    }
+    result.push(tempArr);
+  }
+  return result;
 }
 
 
